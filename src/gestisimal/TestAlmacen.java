@@ -12,7 +12,7 @@ public class TestAlmacen {
     int estado = 0;
     Almacen a1 = new Almacen();
     while (estado != 7) {
-      System.out.println("\n\n***GESTISIMAL***");
+      System.out.println("\n***GESTISIMAL***");
       System.out.println("________________");
       System.out.println("1. Listado");
       System.out.println("2. Alta");
@@ -22,7 +22,7 @@ public class TestAlmacen {
       System.out.println("6. Salida de mercancía");
       System.out.println("7. Salir");
       
-      System.out.print("Introduce una opción: ");
+      System.out.print("\nIntroduce una opción: ");
       estado = s.nextInt();
       
       switch (estado) {
@@ -33,6 +33,7 @@ public class TestAlmacen {
       case 2:
         System.out.print("Introduce la descripción del artículo: ");
         String desc = s.next();
+        s.nextLine();
         System.out.print("\nIntroduce el precio de compra: ");
         double pCompra = s.nextDouble();
         System.out.print("\nIntroduce el precio de venta: ");
@@ -45,7 +46,15 @@ public class TestAlmacen {
       case 3:
         System.out.print("\nIntroduce el código el artículo a eliminar: ");
         int code = s.nextInt();
-        a1.remArt(code);
+        try {
+          if (a1.remArt(code)) {
+            System.out.println("Artículo " + code + " eliminado.");
+          } else {
+            System.out.println("No existe ningún artículo con el código " + code);
+          }
+        } catch (ArticuloNoExisteException e) {
+          System.out.println(e.getMessage());
+        }
         break;
         
       case 4:
@@ -54,6 +63,7 @@ public class TestAlmacen {
         
         System.out.print("Introduce la descripción del artículo: ");
         String desc2 = s.next();
+        s.nextLine();
         System.out.print("\nIntroduce el precio de compra: ");
         double pCompra2 = s.nextDouble();
         System.out.print("\nIntroduce el precio de venta: ");
@@ -80,7 +90,11 @@ public class TestAlmacen {
         System.out.print("\n¿Cuantos salen?: ");
         int salida = s.nextInt();
         
-        a1.dExistencias(codesm, salida);
+        try {
+          a1.dExistencias(codesm, salida);
+        } catch (Exception e) {
+          System.out.println(e.getMessage());          
+        }
         break;
         
       case 7:
