@@ -6,7 +6,7 @@ package gestisimal;
  */
 public class Articulo{
   // Atributos ////////
-  int codigo;
+  private int codigo;
   String descripcion;
   double precioCompra;
   double precioVenta;
