@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Almacen {
   // Creo un ArrayList de artículos (es decir, objetos de la clase Articulo)
-  private ArrayList<Articulo> atls = new ArrayList<Articulo>();
+  private ArrayList<Articulo> almacen = new ArrayList<Articulo>();
   
   /**
    * Método para añadir artículos al almacén.
@@ -18,8 +18,8 @@ public class Almacen {
    * @param unidades
    */
   public void addArt(String descripcion, double precioCompra, double precioVenta, int unidades) {
-    atls.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añado un nuevo artículo en el ArrayList de artículos.
-    System.out.println(atls.get(atls.size()-1)); // Devuelvo el último objeto del ArrayList, que sería el último artículo.
+    almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añado un nuevo artículo en el ArrayList de artículos.
+    System.out.println(almacen.get(almacen.size()-1)); // Devuelvo el último objeto del ArrayList, que sería el último artículo.
   }
   
   /**
@@ -30,7 +30,7 @@ public class Almacen {
    * @throws ArticuloNoExisteException
    */
   public boolean remArt(int code) throws ArticuloNoExisteException {
-    return atls.remove(new Articulo(code));
+    return almacen.remove(new Articulo(code));
   }
   
   /**
@@ -43,9 +43,9 @@ public class Almacen {
    * @param unidades
    */
   public void modArt(int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
-    int sitio = atls.indexOf(new Articulo(code)); // Busco el artículo
-    atls.remove(sitio); // Borro el artículo
-    atls.add(sitio, new Articulo(code, descripcion, precioCompra, precioVenta, unidades)); // Creo de nuevo el artículo
+    int sitio = almacen.indexOf(new Articulo(code)); // Busco el artículo
+    almacen.remove(sitio); // Borro el artículo
+    almacen.add(sitio, new Articulo(code, descripcion, precioCompra, precioVenta, unidades)); // Creo de nuevo el artículo
   }
   
   /**
@@ -55,9 +55,9 @@ public class Almacen {
    * @param cantidad
    */
   public void iExistencias(int code, int cantidad){
-    int sitio = atls.indexOf(new Articulo(code)); // Guardo la posición para luego saber donde tengo que insertar la nueva cantidad
-    Articulo elemento = atls.get(sitio); // Guardo en una variable el artículo para usarlo después
-    atls.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades+cantidad)); // Cambio el articulo, aunque mantengo todo excepto las unidades.
+    int sitio = almacen.indexOf(new Articulo(code)); // Guardo la posición para luego saber donde tengo que insertar la nueva cantidad
+    Articulo elemento = almacen.get(sitio); // Guardo en una variable el artículo para usarlo después
+    almacen.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades+cantidad)); // Cambio el articulo, aunque mantengo todo excepto las unidades.
   }
   
   /**
@@ -68,10 +68,10 @@ public class Almacen {
    * @throws Exception
    */
   public void dExistencias(int code, int cantidad) throws Exception{
-    int sitio = atls.indexOf(new Articulo(code)); // Guardo la posición para luego saber donde tengo que insertar la nueva cantidad
-    Articulo elemento = atls.get(sitio); // Guardo en una variable el artículo para usarlo después
+    int sitio = almacen.indexOf(new Articulo(code)); // Guardo la posición para luego saber donde tengo que insertar la nueva cantidad
+    Articulo elemento = almacen.get(sitio); // Guardo en una variable el artículo para usarlo después
     if (elemento.unidades>cantidad) {
-      atls.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades-cantidad)); // Cambio el articulo, aunque mantengo todo excepto las unidades.
+      almacen.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades-cantidad)); // Cambio el articulo, aunque mantengo todo excepto las unidades.
     } else {
       throw new UnidadesNegativasException("Las unidades no pueden ser negativas.");
     }
@@ -84,14 +84,14 @@ public class Almacen {
    * @return
    */
   public Articulo verArticulo(int code) {
-    return atls.get(atls.indexOf(new Articulo(code)));
+    return almacen.get(almacen.indexOf(new Articulo(code)));
   }
   
   @Override
   public String toString() {
     String tmp = "";
-    for (int i=0;i<=atls.size()-1;i++) {
-      tmp = tmp + atls.get(i) + "\n"; // Voy concatenando todo en una variable 
+    for (int i=0;i<=almacen.size()-1;i++) {
+      tmp = tmp + almacen.get(i) + "\n"; // Voy concatenando todo en una variable 
     }
     return "\n" + tmp;
   }
