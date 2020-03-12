@@ -17,7 +17,7 @@ public class Almacen {
    * @param precioVenta
    * @param unidades
    */
-  public Articulo addArt(String descripcion, double precioCompra, double precioVenta, int unidades) {
+  Articulo addArt(String descripcion, double precioCompra, double precioVenta, int unidades) {
     almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añado un nuevo artículo en el ArrayList de artículos.
     return almacen.get(almacen.size()-1); // Devuelvo el último objeto del ArrayList, que sería el último artículo.
   }
@@ -29,7 +29,7 @@ public class Almacen {
    * @return boolean
    * @throws ArticuloNoExisteException
    */
-  public boolean remArt(int code) throws ArticuloNoExisteException {
+  boolean remArt(int code) throws ArticuloNoExisteException {
     return almacen.remove(new Articulo(code));
   }
   
@@ -42,7 +42,7 @@ public class Almacen {
    * @param precioVenta
    * @param unidades
    */
-  public void modArt(int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
+  void modArt(int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
     int sitio = almacen.indexOf(new Articulo(code)); // Busco el artículo
     almacen.remove(sitio); // Borro el artículo
     almacen.add(sitio, new Articulo(code, descripcion, precioCompra, precioVenta, unidades)); // Creo de nuevo el artículo
@@ -54,7 +54,7 @@ public class Almacen {
    * @param code
    * @param cantidad
    */
-  public void iExistencias(int code, int cantidad){
+  void iExistencias(int code, int cantidad){
     int sitio = almacen.indexOf(new Articulo(code)); // Guardo la posición para luego saber donde tengo que insertar la nueva cantidad
     Articulo elemento = almacen.get(sitio); // Guardo en una variable el artículo para usarlo después
     almacen.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades+cantidad)); // Cambio el articulo, aunque mantengo todo excepto las unidades.
@@ -67,7 +67,7 @@ public class Almacen {
    * @param cantidad
    * @throws Exception
    */
-  public void dExistencias(int code, int cantidad) throws Exception{
+  void dExistencias(int code, int cantidad) throws Exception{
     int sitio = almacen.indexOf(new Articulo(code)); // Guardo la posición para luego saber donde tengo que insertar la nueva cantidad
     Articulo elemento = almacen.get(sitio); // Guardo en una variable el artículo para usarlo después
     if (elemento.unidades>cantidad) {
@@ -83,7 +83,7 @@ public class Almacen {
    * @param code
    * @return
    */
-  public Articulo verArticulo(int code) {
+  Articulo verArticulo(int code) {
     return almacen.get(almacen.indexOf(new Articulo(code)));
   }
   
