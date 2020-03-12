@@ -14,7 +14,7 @@ public class Articulo{
   private static int contador = 1;
   
   // Constructores ////////
-  public Articulo (String descripcion, double precioCompra, double precioVenta, int unidades) {
+  Articulo (String descripcion, double precioCompra, double precioVenta, int unidades) {
     this.codigo = contador++;
     this.descripcion = descripcion;
     this.precioCompra = precioCompra;
@@ -22,7 +22,7 @@ public class Articulo{
     this.unidades = unidades;
   }
   
-  public Articulo (int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
+  Articulo (int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
     this.codigo = code;
     this.descripcion = descripcion;
     this.precioCompra = precioCompra;
@@ -30,7 +30,7 @@ public class Articulo{
     this.unidades = unidades;
   }
   
-  public Articulo(int code) {
+  Articulo(int code) {
     this.codigo = code;
   }
 
