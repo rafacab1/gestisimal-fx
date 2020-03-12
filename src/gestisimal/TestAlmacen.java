@@ -53,7 +53,7 @@ public class TestAlmacen {
             System.out.println("No existe ningún artículo con el código " + code);
           }
         } catch (ArticuloNoExisteException e) {
-          System.out.println(e.getMessage());
+          System.err.println(e.getMessage()); // Hay que revisarlo, issue #11
         }
         break;
         

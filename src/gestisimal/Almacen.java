@@ -89,10 +89,10 @@ public class Almacen {
   
   @Override
   public String toString() {
-    String tmp = "";
+    StringBuilder txtBuilder = new StringBuilder();
     for (int i=0;i<=almacen.size()-1;i++) {
-      tmp = tmp + almacen.get(i) + "\n"; // Voy concatenando todo en una variable 
+      txtBuilder.append(almacen.get(i) + "\n"); // Voy concatenando todo en una variable 
     }
-    return "\n" + tmp;
+    return "\n" + (txtBuilder.toString());
   }
 }
