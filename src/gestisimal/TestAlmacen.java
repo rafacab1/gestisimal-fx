@@ -40,7 +40,7 @@ public class TestAlmacen {
         double pVenta = s.nextDouble();
         System.out.print("\nIntroduce las unidades: ");
         int udes = s.nextInt();
-        a1.addArt(desc, pCompra, pVenta, udes);
+        System.out.println(a1.addArt(desc, pCompra, pVenta, udes));
         break;
         
       case 3:

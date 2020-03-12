@@ -17,9 +17,9 @@ public class Almacen {
    * @param precioVenta
    * @param unidades
    */
-  public void addArt(String descripcion, double precioCompra, double precioVenta, int unidades) {
+  public Articulo addArt(String descripcion, double precioCompra, double precioVenta, int unidades) {
     almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añado un nuevo artículo en el ArrayList de artículos.
-    System.out.println(almacen.get(almacen.size()-1)); // Devuelvo el último objeto del ArrayList, que sería el último artículo.
+    return almacen.get(almacen.size()-1); // Devuelvo el último objeto del ArrayList, que sería el último artículo.
   }
   
   /**

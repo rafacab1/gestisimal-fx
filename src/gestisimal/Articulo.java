@@ -39,7 +39,7 @@ public class Articulo{
     return codigo;
   }
 
-  public void setCodigo(int codigo) {
+   void setCodigo(int codigo) {
     this.codigo = codigo++;
   }
 
