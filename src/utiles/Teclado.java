@@ -1,5 +1,6 @@
 package utiles;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /*
@@ -29,14 +30,15 @@ public class Teclado {
     System.out.print(msg);
     return leerCaracter();
   }
+  
   public static char leerCaracter() {
-    char caracter;
-    try {
-      caracter = leerCadena().charAt(0);
-    } catch (Exception e) {
-      caracter = 0;
-    }
-    return caracter;
+    do {
+      try {
+        return leerCadena().charAt(0);
+      } catch (IndexOutOfBoundsException e) {
+        System.err.println("Introduce un carácter... ");
+      }
+    } while (true);
   }
   
 //////////////////////////////
@@ -60,13 +62,13 @@ public class Teclado {
   }
   
   public static String leerCadena() {
-    String tmp;
-    try {
-      tmp = s.nextLine();
-    } catch (Exception e) {
-      tmp = "";
-    }
-    return tmp;
+    do {
+      try {
+        return s.nextLine();
+      } catch (NoSuchElementException e) {
+        System.err.println("Introduce una cadena... ");
+      }
+    } while (true);
   }
   
 //////////////////////////////
@@ -90,13 +92,13 @@ public class Teclado {
   }
   
   public static int leerEntero() {
-    int entero;
-    try {
-      entero = Integer.parseInt(leerCadena());
-    } catch (NumberFormatException e) {
-      entero = 0;
-    }
-    return entero;
+    do {
+      try {
+        return Integer.parseInt(leerCadena());
+      } catch (NumberFormatException e) {
+        System.err.println("Introduce un entero... ");
+      }
+    } while (true);
   }
   
 //////////////////////////////
@@ -120,12 +122,12 @@ public class Teclado {
   }
   
   public static double leerDouble() {
-    double decimal;
-    try {
-      decimal = Double.parseDouble(leerCadena());
-    } catch (NumberFormatException e) {
-      decimal = 0;
-    }
-    return decimal;
+    do {
+      try {
+        return Double.parseDouble(leerCadena());
+      } catch (NumberFormatException e) {
+        System.err.println("Introduce un decimal... ");
+      }
+    } while (true);
   }
 }
