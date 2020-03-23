@@ -8,11 +8,11 @@ package utiles;
 public class Menu {
   
   // Propiedades Menu //////
-  String tituloMenu;
-  String[] opciones;
+  private String tituloMenu;
+  private String[] opciones;
   
   // Variables //////
-  int eleccion;
+  private int eleccion;
   
   // Constructor //////
   public Menu(String tituloMenu, String[] opciones) {
@@ -38,6 +38,18 @@ public class Menu {
   }
   
   // Métodos //////
+  
+  /**
+   * Método que muestra el menú y pide la opción
+   * 
+   * @return opción, llamando al método escoger
+   */
+  public int gestiona() {
+    muestraMenu();
+    return escoger();
+  }
+  
+  
   /**
    * Muestra el menú por pantalla
    */
@@ -52,8 +64,7 @@ public class Menu {
    * Escoge una opción del menú
    * @return
    */
-  public int escoger() {
-    muestraMenu();
+  private int escoger() {
     do {
       eleccion = Teclado.leerEntero("Escoge una opción: ");
     } while (!(eleccion >= 1 && eleccion <= opciones.length));

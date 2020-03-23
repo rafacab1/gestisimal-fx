@@ -106,7 +106,7 @@ public class TestAlmacen {
     Menu menu = new Menu("GESTISIMAL", opciones);
     
     do {
-      switch (menu.escoger()) {
+      switch (menu.gestiona()) {
       case 1:
         System.out.println(a1);
         break;
