@@ -64,13 +64,17 @@ public class TestAlmacen {
   
   /**
    * Da de baja un artículo.
-   * @throws Exception
+   * @throws ArticuloNoExisteException
    */
   private static void baja() throws ArticuloNoExisteException {
     try {
-      a1.eliminar(pedirCodigo());
+      if (a1.eliminar(pedirCodigo())) {
+        System.out.println("Artículo eliminado.");
+      } else {
+        throw new ArticuloNoExisteException("El artículo no existe.");
+      }
     } catch (ArticuloNoExisteException e) {
-      System.err.println(e.getMessage()); // Hay que revisarlo, issue #11
+      System.err.println(e.getMessage());
     }
   }
   

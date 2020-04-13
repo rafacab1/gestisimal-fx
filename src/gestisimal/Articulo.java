@@ -7,10 +7,10 @@ package gestisimal;
 public class Articulo{
   // Atributos ////////
   private int codigo;
-  String descripcion;
-  double precioCompra;
-  double precioVenta;
-  int unidades; // Unidades deben ser siempre positivas
+  private String descripcion;
+  private double precioCompra;
+  private double precioVenta;
+  private int unidades; // Unidades deben ser siempre positivas
   private static int contador = 1;
   
   // Constructor ////////
