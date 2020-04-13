@@ -13,7 +13,7 @@ public class Articulo{
   int unidades; // Unidades deben ser siempre positivas
   private static int contador = 1;
   
-  // Constructores ////////
+  // Constructor ////////
   Articulo (String descripcion, double precioCompra, double precioVenta, int unidades) {
     this.codigo = contador++;
     this.descripcion = descripcion;
@@ -22,65 +22,96 @@ public class Articulo{
     this.unidades = unidades;
   }
   
-  Articulo (int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
-    this.codigo = code;
-    this.descripcion = descripcion;
-    this.precioCompra = precioCompra;
-    this.precioVenta = precioVenta;
-    this.unidades = unidades;
-  }
-  
+  // Para buscar Articulo
   Articulo(int code) {
     this.codigo = code;
   }
 
   // Getters & Setters ////////
-  public int getCodigo() {
+  private int getCodigo() {
     return codigo;
   }
 
-   void setCodigo(int codigo) {
-    this.codigo = codigo++;
-  }
-
-  public String getDescripcion() {
+  private String getDescripcion() {
     return descripcion;
   }
 
-  public void setDescripcion(String descripcion) {
+  private void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
   }
 
-  public double getPrecioCompra() {
+  private double getPrecioCompra() {
     return precioCompra;
   }
 
-  public void setPrecioCompra(double precioCompra) {
+  private void setPrecioCompra(double precioCompra) {
     this.precioCompra = precioCompra;
   }
 
-  public double getPrecioVenta() {
+  private double getPrecioVenta() {
     return precioVenta;
   }
 
-  public void setPrecioVenta(double precioVenta) {
+  private void setPrecioVenta(double precioVenta) {
     this.precioVenta = precioVenta;
   }
 
-  public int getUnidades() {
+  private int getUnidades() {
     return unidades;
   }
 
-  public void setUnidades(int unidades) throws UnidadesNegativasException {
+  private void setUnidades(int unidades) throws UnidadesNegativasException {
     if (unidades<0) {
       throw new UnidadesNegativasException("Las unidades no pueden ser negativas.");
     }
     this.unidades = unidades;
   }
   
+  /**
+   * Método modificar para modificar las propiedades de Articulo
+   * 
+   * @param descripcion
+   * @param precioCompra
+   * @param precioVenta
+   * @param unidades
+   * @return
+   * @throws UnidadesNegativasException
+   */
+  protected Articulo modificar(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+    setDescripcion(descripcion);
+    setPrecioCompra(precioCompra);
+    setPrecioVenta(precioVenta);
+    setUnidades(unidades);
+    return this;
+  }
+  
+  /**
+   * Método incrementarStock para incrementar el stock de Articulo
+   * 
+   * @param unidades
+   * @return
+   * @throws UnidadesNegativasException
+   */
+  protected Articulo incrementarStock(int unidades) throws UnidadesNegativasException {
+    setUnidades(getUnidades() + unidades);
+    return this;
+  }
+  
+  /**
+   * Método decrementarStock para decrementar el stock de Articulo
+   * 
+   * @param unidades
+   * @return
+   * @throws UnidadesNegativasException
+   */
+  protected Articulo decrementarStock(int unidades) throws UnidadesNegativasException {
+    setUnidades(getUnidades() - unidades);
+    return this;
+  }
+  
   @Override
   public String toString() {
-    return "COD → " + this.codigo + ".\n Descripción → " + this.descripcion + "\n Precio de compra → " + this.precioCompra + "€\n Precio de venta → " + this.precioVenta + "€\n Unidades → " + this.unidades;
+    return "COD → " + getCodigo() + ".\n Descripción → " + getDescripcion() + "\n Precio de compra → " + getPrecioCompra() + "€\n Precio de venta → " + getPrecioVenta() + "€\n Unidades → " + getUnidades();
   }
   
   @Override

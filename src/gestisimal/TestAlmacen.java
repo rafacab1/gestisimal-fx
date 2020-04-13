@@ -59,7 +59,7 @@ public class TestAlmacen {
    * @return Articulo
    */
   private static Articulo alta() {
-    return a1.addArt(pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
+    return a1.anadir(pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
   }
   
   /**
@@ -68,7 +68,7 @@ public class TestAlmacen {
    */
   private static void baja() throws ArticuloNoExisteException {
     try {
-      a1.remArt(pedirCodigo());
+      a1.eliminar(pedirCodigo());
     } catch (ArticuloNoExisteException e) {
       System.err.println(e.getMessage()); // Hay que revisarlo, issue #11
     }
@@ -76,27 +76,39 @@ public class TestAlmacen {
   
   /**
    * Modifica un artículo
+   * @throws UnidadesNegativasException 
    */
-  private static void modificacion() {
-    a1.modArt(pedirCodigo(), pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
+  private static void modificacion() throws UnidadesNegativasException {
+    a1.modificar(pedirCodigo(), pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
   }
   
   /**
    * Incrementa las existencias de un artículo
+   * @throws ArticuloNoExisteException 
+   * @throws UnidadesNegativasException 
    */
-  private static void incrementarExistencias() {
-    a1.iExistencias(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias entran? "));
+  private static void incrementarStock() throws UnidadesNegativasException, ArticuloNoExisteException {
+    try {
+      a1.incrementarStock(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias entran? "));
+    } catch (UnidadesNegativasException e) {
+      System.err.println(e.getMessage());
+    } catch (ArticuloNoExisteException e) {
+      System.err.println(e.getMessage());
+    }
   }
   
   /**
    * Decrementa las existencias de un artículo
-   * @throws Exception
+   * @throws ArticuloNoExisteException 
+   * @throws UnidadesNegativasException 
    */
-  private static void decrementarExistencias() throws Exception {
+  private static void decrementarStock() throws UnidadesNegativasException, ArticuloNoExisteException {
     try {
-      a1.dExistencias(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias salen? "));
+      a1.decrementarStock(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias salen? "));
     } catch (UnidadesNegativasException e) {
       System.err.println(e.getMessage());          
+    } catch (ArticuloNoExisteException e) {
+      System.err.println(e.getMessage());
     }
   }
   
@@ -121,16 +133,14 @@ public class TestAlmacen {
         
       case 4:
         modificacion();
-        System.out.println("Artículo modificado.");
         break;
         
       case 5:
-        incrementarExistencias();
-        System.out.println("Existencias incrementadas.");
+        incrementarStock();
         break;
         
       case 6:
-        decrementarExistencias();
+        decrementarStock();
         break;
         
       case 7:

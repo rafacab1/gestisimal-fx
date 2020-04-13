@@ -19,7 +19,7 @@ public class Almacen {
    * @param precioVenta
    * @param unidades
    */
-  Articulo addArt(String descripcion, double precioCompra, double precioVenta, int unidades) {
+  protected Articulo anadir(String descripcion, double precioCompra, double precioVenta, int unidades) {
     almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añade un nuevo artículo en el ArrayList de artículos.
     return almacen.get(almacen.size()-1); // Devuelve el último objeto del ArrayList, que sería el último artículo.
   }
@@ -31,7 +31,7 @@ public class Almacen {
    * @return boolean
    * @throws ArticuloNoExisteException
    */
-  boolean remArt(int code) throws ArticuloNoExisteException {
+  protected boolean eliminar(int code) throws ArticuloNoExisteException {
     return almacen.remove(new Articulo(code));
   }
   
@@ -44,11 +44,10 @@ public class Almacen {
    * @param precioVenta
    * @param unidades
    * @return 
+   * @throws UnidadesNegativasException 
    */
-  void modArt(int code, String descripcion, double precioCompra, double precioVenta, int unidades) {
-    int sitio = almacen.indexOf(new Articulo(code)); // Busca el artículo
-    almacen.remove(sitio); // Borra el artículo
-    almacen.add(sitio, new Articulo(code, descripcion, precioCompra, precioVenta, unidades)); // Crea de nuevo el artículo
+  protected Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+    return almacen.get(almacen.indexOf(new Articulo(code))).modificar(descripcion, precioCompra, precioVenta, unidades);
   }
   
   /**
@@ -56,11 +55,15 @@ public class Almacen {
    * 
    * @param code
    * @param cantidad
+   * @throws UnidadesNegativasException 
+   * @throws ArticuloNoExisteException 
    */
-  void iExistencias(int code, int cantidad){
-    int sitio = almacen.indexOf(new Articulo(code)); // Guarda la posición para luego saber donde tengo que insertar la nueva cantidad
-    Articulo elemento = almacen.get(sitio); // Guarda en una variable el artículo para usarlo después
-    almacen.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades+cantidad)); // Cambia el articulo, aunque mantiene todo excepto las unidades.
+  protected Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
+    try {
+      return almacen.get(almacen.indexOf(new Articulo(code))).incrementarStock(cantidad);
+    } catch (IndexOutOfBoundsException e) {
+      throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
+    }
   }
   
   /**
@@ -68,15 +71,14 @@ public class Almacen {
    * 
    * @param code
    * @param cantidad
-   * @throws Exception
+   * @throws UnidadesNegativasException 
+   * @throws ArticuloNoExisteException 
    */
-  void dExistencias(int code, int cantidad) throws Exception{
-    int sitio = almacen.indexOf(new Articulo(code)); // Guarda la posición para luego saber donde tengo que insertar la nueva cantidad
-    Articulo elemento = almacen.get(sitio); // Guarda en una variable el artículo para usarlo después
-    if (elemento.unidades>cantidad) {
-      almacen.set(sitio, new Articulo(code, elemento.descripcion, elemento.precioCompra, elemento.precioVenta, elemento.unidades-cantidad)); // Cambia el articulo, aunque mantiene todo excepto las unidades.
-    } else {
-      throw new UnidadesNegativasException("Las unidades no pueden ser negativas.");
+  protected Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
+    try {
+      return almacen.get(almacen.indexOf(new Articulo(code))).decrementarStock(cantidad);
+    } catch (IndexOutOfBoundsException e) {
+      throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
     }
   }
   
@@ -86,7 +88,7 @@ public class Almacen {
    * @param code
    * @return
    */
-  Articulo verArticulo(int code) {
+  protected Articulo verArticulo(int code) {
     return almacen.get(almacen.indexOf(new Articulo(code)));
   }
   
