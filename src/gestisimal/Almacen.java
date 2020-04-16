@@ -19,7 +19,7 @@ public class Almacen {
    * @param precioVenta
    * @param unidades
    */
-  protected Articulo anadir(String descripcion, double precioCompra, double precioVenta, int unidades) {
+  Articulo anadir(String descripcion, double precioCompra, double precioVenta, int unidades) {
     almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añade un nuevo artículo en el ArrayList de artículos.
     return almacen.get(almacen.size()-1); // Devuelve el último objeto del ArrayList, que sería el último artículo.
   }
@@ -31,7 +31,7 @@ public class Almacen {
    * @return boolean
    * @throws ArticuloNoExisteException
    */
-  protected boolean eliminar(int code) throws ArticuloNoExisteException {
+  boolean eliminar(int code) throws ArticuloNoExisteException {
     return almacen.remove(new Articulo(code));
   }
   
@@ -46,7 +46,7 @@ public class Almacen {
    * @return 
    * @throws UnidadesNegativasException 
    */
-  protected Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+  Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
     return almacen.get(almacen.indexOf(new Articulo(code))).modificar(descripcion, precioCompra, precioVenta, unidades);
   }
   
@@ -58,7 +58,7 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  protected Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
+  Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
     try {
       return almacen.get(almacen.indexOf(new Articulo(code))).incrementarStock(cantidad);
     } catch (IndexOutOfBoundsException e) {
@@ -74,7 +74,7 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  protected Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
+  Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
     try {
       return almacen.get(almacen.indexOf(new Articulo(code))).decrementarStock(cantidad);
     } catch (IndexOutOfBoundsException e) {
@@ -88,7 +88,7 @@ public class Almacen {
    * @param code
    * @return
    */
-  protected Articulo verArticulo(int code) {
+  Articulo verArticulo(int code) {
     return almacen.get(almacen.indexOf(new Articulo(code)));
   }
   

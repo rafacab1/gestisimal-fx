@@ -77,7 +77,7 @@ public class Articulo{
    * @return
    * @throws UnidadesNegativasException
    */
-  protected Articulo modificar(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+  Articulo modificar(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
     setDescripcion(descripcion);
     setPrecioCompra(precioCompra);
     setPrecioVenta(precioVenta);
@@ -92,7 +92,7 @@ public class Articulo{
    * @return
    * @throws UnidadesNegativasException
    */
-  protected Articulo incrementarStock(int unidades) throws UnidadesNegativasException {
+  Articulo incrementarStock(int unidades) throws UnidadesNegativasException {
     setUnidades(getUnidades() + unidades);
     return this;
   }
@@ -104,7 +104,7 @@ public class Articulo{
    * @return
    * @throws UnidadesNegativasException
    */
-  protected Articulo decrementarStock(int unidades) throws UnidadesNegativasException {
+  Articulo decrementarStock(int unidades) throws UnidadesNegativasException {
     setUnidades(getUnidades() - unidades);
     return this;
   }
