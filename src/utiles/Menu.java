@@ -11,9 +11,6 @@ public class Menu {
   private String tituloMenu;
   private String[] opciones;
   
-  // Variables //////
-  private int eleccion;
-  
   // Constructor //////
   public Menu(String tituloMenu, String[] opciones) {
     this.tituloMenu = tituloMenu;
@@ -65,6 +62,7 @@ public class Menu {
    * @return
    */
   private int escoger() {
+    int eleccion;
     do {
       eleccion = Teclado.leerEntero("Escoge una opción: ");
     } while (!(eleccion >= 1 && eleccion <= opciones.length));
