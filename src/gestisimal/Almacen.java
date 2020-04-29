@@ -48,7 +48,7 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    */
   Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
-    return almacen.get(almacen.indexOf(new Articulo(code))).modificar(descripcion, precioCompra, precioVenta, unidades);
+    return getArticulo(code).modificar(descripcion, precioCompra, precioVenta, unidades);
   }
   
   /**
@@ -61,7 +61,7 @@ public class Almacen {
    */
   Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
     try {
-      return almacen.get(almacen.indexOf(new Articulo(code))).incrementarStock(cantidad);
+      return getArticulo(code).incrementarStock(cantidad);
     } catch (IndexOutOfBoundsException e) {
       throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
     }
@@ -77,7 +77,7 @@ public class Almacen {
    */
   Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
     try {
-      return almacen.get(almacen.indexOf(new Articulo(code))).decrementarStock(cantidad);
+      return getArticulo(code).decrementarStock(cantidad);
     } catch (IndexOutOfBoundsException e) {
       throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
     }
@@ -89,8 +89,14 @@ public class Almacen {
    * @param code
    * @return
    */
-  Articulo verArticulo(int code) {
-    return almacen.get(almacen.indexOf(new Articulo(code)));
+  Articulo getArticulo(int code) {
+    try {
+      return almacen.get(almacen.indexOf(new Articulo(code)));
+    } catch (IndexOutOfBoundsException e) {
+      System.err.print("Error al encontrar el artículo.");
+      return null;
+    }
+    
   }
   
   @Override

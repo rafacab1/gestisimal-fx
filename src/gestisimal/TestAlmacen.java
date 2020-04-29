@@ -69,11 +69,8 @@ public class TestAlmacen {
    */
   private static void baja() throws ArticuloNoExisteException {
     try {
-      if (a1.eliminar(pedirCodigo())) {
-        System.out.println("Artículo eliminado.");
-      } else {
-        throw new ArticuloNoExisteException("El artículo no existe.");
-      }
+      a1.eliminar(pedirCodigo());
+      System.out.println("Artículo eliminado.");
     } catch (ArticuloNoExisteException e) {
       System.err.println(e.getMessage());
     }
