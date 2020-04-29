@@ -32,7 +32,7 @@ public class Almacen {
    * @return boolean
    * @throws ArticuloNoExisteException
    */
-  boolean eliminar(int code) throws ArticuloNoExisteException {
+  boolean eliminar(int code) {
     return almacen.remove(new Articulo(code));
   }
   
@@ -46,8 +46,9 @@ public class Almacen {
    * @param unidades
    * @return 
    * @throws UnidadesNegativasException 
+   * @throws ArticuloNoExisteException 
    */
-  Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+  Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException, ArticuloNoExisteException {
     return getArticulo(code).modificar(descripcion, precioCompra, precioVenta, unidades);
   }
   
@@ -59,12 +60,8 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
-    try {
-      return getArticulo(code).incrementarStock(cantidad);
-    } catch (IndexOutOfBoundsException e) {
-      throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
-    }
+  Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException {
+    return getArticulo(code).incrementarStock(cantidad);
   }
   
   /**
@@ -75,12 +72,8 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException{
-    try {
-      return getArticulo(code).decrementarStock(cantidad);
-    } catch (IndexOutOfBoundsException e) {
-      throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
-    }
+  Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException {
+    return getArticulo(code).decrementarStock(cantidad);
   }
   
   /**
@@ -88,13 +81,13 @@ public class Almacen {
    * 
    * @param code
    * @return
+   * @throws ArticuloNoExisteException 
    */
-  Articulo getArticulo(int code) {
+  Articulo getArticulo(int code) throws ArticuloNoExisteException {
     try {
       return almacen.get(almacen.indexOf(new Articulo(code)));
     } catch (IndexOutOfBoundsException e) {
-      System.err.print("Error al encontrar el artículo.");
-      return null;
+      throw new ArticuloNoExisteException("El artículo con código " + code + " no existe.");
     }
     
   }

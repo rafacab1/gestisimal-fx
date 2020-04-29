@@ -35,7 +35,7 @@ public class Teclado {
       try {
         return leerCadena().charAt(0);
       } catch (IndexOutOfBoundsException e) {
-        System.err.println("Introduce un carácter... ");
+        System.err.print("Introduce un carácter... ");
       }
     } while (true);
   }
@@ -91,7 +91,7 @@ public class Teclado {
       try {
         return Integer.parseInt(leerCadena());
       } catch (NumberFormatException e) {
-        System.err.println("Introduce un entero... ");
+        System.err.print("Introduce un entero... ");
       }
     } while (true);
   }
@@ -121,7 +121,7 @@ public class Teclado {
       try {
         return Double.parseDouble(leerCadena());
       } catch (NumberFormatException e) {
-        System.err.println("Introduce un decimal... ");
+        System.err.print("Introduce un decimal... ");
       }
     } while (true);
   }

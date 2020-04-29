@@ -7,7 +7,10 @@ package gestisimal;
 
 @SuppressWarnings("serial")
 public class ArticuloNoExisteException extends Exception {
+  public ArticuloNoExisteException() {
+    super("Este artículo no existe");
+  }
   public ArticuloNoExisteException(String msg) {
-    super("Este artículo no existe.");
+    super(msg);
   }
 }

@@ -67,21 +67,25 @@ public class TestAlmacen {
    * Da de baja un artículo.
    * @throws ArticuloNoExisteException
    */
-  private static void baja() throws ArticuloNoExisteException {
-    try {
-      a1.eliminar(pedirCodigo());
-      System.out.println("Artículo eliminado.");
-    } catch (ArticuloNoExisteException e) {
-      System.err.println(e.getMessage());
-    }
+  private static void baja() {
+    a1.eliminar(pedirCodigo());
+    System.out.println("Artículo eliminado.");
   }
   
   /**
    * Modifica un artículo
    * @throws UnidadesNegativasException 
+   * @throws ArticuloNoExisteException 
    */
-  private static void modificacion() throws UnidadesNegativasException {
-    a1.modificar(pedirCodigo(), pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
+  private static void modificacion() throws UnidadesNegativasException, ArticuloNoExisteException {
+    try {
+      a1.modificar(pedirCodigo(), pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
+      System.out.println("Artículo modificado.");
+    } catch (UnidadesNegativasException e) {
+      System.err.println(e.getMessage());
+    } catch (ArticuloNoExisteException e) {
+      System.err.println(e.getMessage());
+    }
   }
   
   /**
@@ -92,6 +96,7 @@ public class TestAlmacen {
   private static void incrementarStock() throws UnidadesNegativasException, ArticuloNoExisteException {
     try {
       a1.incrementarStock(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias entran? "));
+      System.out.println("Unidades incrementadas.");
     } catch (UnidadesNegativasException e) {
       System.err.println(e.getMessage());
     } catch (ArticuloNoExisteException e) {
@@ -107,6 +112,7 @@ public class TestAlmacen {
   private static void decrementarStock() throws UnidadesNegativasException, ArticuloNoExisteException {
     try {
       a1.decrementarStock(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias salen? "));
+      System.out.println("Unidades decrementadas.");
     } catch (UnidadesNegativasException e) {
       System.err.println(e.getMessage());          
     } catch (ArticuloNoExisteException e) {
