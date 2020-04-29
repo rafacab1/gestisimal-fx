@@ -1,6 +1,5 @@
 package utiles;
 
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /*
@@ -63,11 +62,7 @@ public class Teclado {
   
   public static String leerCadena() {
     do {
-      try {
-        return s.nextLine();
-      } catch (NoSuchElementException e) {
-        System.err.println("Introduce una cadena... ");
-      }
+       return s.nextLine();
     } while (true);
   }
   
