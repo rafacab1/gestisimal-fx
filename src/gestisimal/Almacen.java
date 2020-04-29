@@ -32,7 +32,8 @@ public class Almacen {
    * @return boolean
    * @throws ArticuloNoExisteException
    */
-  boolean eliminar(int code) {
+  boolean eliminar(int code) throws ArticuloNoExisteException {
+    getArticulo(code);
     return almacen.remove(new Articulo(code));
   }
   
