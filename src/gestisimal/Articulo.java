@@ -14,12 +14,12 @@ public class Articulo{
   private static int contador = 1;
   
   // Constructor ////////
-  Articulo (String descripcion, double precioCompra, double precioVenta, int unidades) {
+  Articulo (String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
     this.codigo = contador++;
-    this.descripcion = descripcion;
-    this.precioCompra = precioCompra;
-    this.precioVenta = precioVenta;
-    this.unidades = unidades;
+    setDescripcion(descripcion);
+    setPrecioCompra(precioCompra);
+    setPrecioVenta(precioVenta);
+    setUnidades(unidades);
   }
   
   // Para buscar Articulo

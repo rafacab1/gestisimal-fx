@@ -57,8 +57,9 @@ public class TestAlmacen {
   /**
    * Da de alta un artículo.
    * @return Articulo
+   * @throws UnidadesNegativasException 
    */
-  private static Articulo alta() {
+  private static Articulo alta() throws UnidadesNegativasException {
     return a1.anadir(pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
   }
   

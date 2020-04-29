@@ -18,8 +18,9 @@ public class Almacen {
    * @param precioCompra
    * @param precioVenta
    * @param unidades
+   * @throws UnidadesNegativasException 
    */
-  Articulo anadir(String descripcion, double precioCompra, double precioVenta, int unidades) {
+  Articulo anadir(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
     almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añade un nuevo artículo en el ArrayList de artículos.
     return almacen.get(almacen.size()-1); // Devuelve el último objeto del ArrayList, que sería el último artículo.
   }
