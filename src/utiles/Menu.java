@@ -53,7 +53,7 @@ public class Menu {
   private void muestraMenu() {
     System.out.println("\n" + tituloMenu + "\n");
     for (int i=0;i<opciones.length;i++) {
-      System.out.println(opciones[i]);
+      System.out.println(i+1 + ". " + opciones[i]);
     }
   }
   

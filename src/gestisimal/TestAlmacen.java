@@ -119,7 +119,7 @@ public class TestAlmacen {
   
   public static void main(String[] args) {   
     // Crea un objeto de la clase Menu
-    String[] opciones = new String[] {"1. Listado", "2. Alta", "3. Baja", "4. Modificación", "5. Entrada de mercancía", "6. Salida de Mercancia", "7. Salir"};
+    String[] opciones = new String[] {"Listado", "Alta", "Baja", "Modificación", "Entrada de mercancía", "Salida de Mercancia", "Salir"};
     Menu menu = new Menu("GESTISIMAL", opciones);
     
     do {
