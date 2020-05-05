@@ -9,7 +9,7 @@ import utiles.Teclado;
 public class TestAlmacen {
   
   // Variables //////
-  static Almacen almacen = new Almacen(); 
+  private static Almacen almacen = new Almacen(); 
   
   // Métodos //////
   // Obtención de datos

@@ -13,24 +13,24 @@ public class Menu {
   
   // Constructor //////
   public Menu(String tituloMenu, String[] opciones) {
-    this.tituloMenu = tituloMenu;
-    this.opciones = opciones;
+    setTituloMenu(tituloMenu);
+    setOpciones(opciones);
   }
 
   // Getters & Setters //////
-  public String getTituloMenu() {
+  private String getTituloMenu() {
     return tituloMenu;
   }
 
-  public void setTituloMenu(String tituloMenu) {
+  private void setTituloMenu(String tituloMenu) {
     this.tituloMenu = tituloMenu;
   }
 
-  public String[] getOpciones() {
+  private String[] getOpciones() {
     return opciones;
   }
 
-  public void setOpciones(String[] opciones) {
+  private void setOpciones(String[] opciones) {
     this.opciones = opciones;
   }
   
@@ -51,9 +51,9 @@ public class Menu {
    * Muestra el menú por pantalla
    */
   private void muestraMenu() {
-    System.out.println("\n" + tituloMenu + "\n");
-    for (int i=0;i<opciones.length;i++) {
-      System.out.println(i+1 + ". " + opciones[i]);
+    System.out.println("\n" + getTituloMenu() + "\n");
+    for (int i=0;i<getOpciones().length;i++) {
+      System.out.println(i+1 + ". " + getOpciones()[i]);
     }
   }
   
@@ -65,7 +65,7 @@ public class Menu {
     int eleccion;
     do {
       eleccion = Teclado.leerEntero("Escoge una opción: ");
-    } while (!(eleccion >= 1 && eleccion <= opciones.length));
+    } while (!(eleccion >= 1 && eleccion <= getOpciones().length));
     return eleccion;
   }
   
