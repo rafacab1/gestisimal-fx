@@ -57,10 +57,14 @@ public class TestAlmacen {
   /**
    * Da de alta un artículo.
    * @return Articulo
-   * @throws UnidadesNegativasException 
    */
-  private static Articulo alta() throws UnidadesNegativasException {
-    return almacen.anadir(pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
+  private static void alta() {
+    try {
+      almacen.anadir(pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
+      System.out.println(almacen.getUltimo());
+    } catch (UnidadesNegativasException e) {
+      System.err.println("Error en el alta. " + e.getMessage());
+    }
   }
   
   /**
@@ -77,10 +81,8 @@ public class TestAlmacen {
   
   /**
    * Modifica un artículo
-   * @throws UnidadesNegativasException 
-   * @throws ArticuloNoExisteException 
    */
-  private static void modificacion() throws UnidadesNegativasException, ArticuloNoExisteException {
+  private static void modificacion() {
     try {
       almacen.modificar(pedirCodigo(), pedirDescripcion(), pedirPrecioCompra(), pedirPrecioVenta(), pedirUnidades());
       System.out.println("Artículo modificado.");
@@ -93,37 +95,29 @@ public class TestAlmacen {
   
   /**
    * Incrementa las existencias de un artículo
-   * @throws ArticuloNoExisteException 
-   * @throws UnidadesNegativasException 
    */
-  private static void incrementarStock() throws UnidadesNegativasException, ArticuloNoExisteException {
+  private static void incrementarStock() {
     try {
       almacen.incrementarStock(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias entran? "));
       System.out.println("Unidades incrementadas.");
-    } catch (UnidadesNegativasException e) {
-      System.err.println(e.getMessage());
-    } catch (ArticuloNoExisteException e) {
-      System.err.println(e.getMessage());
-    }
+    } catch (UnidadesNegativasException | ArticuloNoExisteException e) {
+      System.err.println("Error al incrementar " + e.getMessage());
+    } 
   }
   
   /**
    * Decrementa las existencias de un artículo
-   * @throws ArticuloNoExisteException 
-   * @throws UnidadesNegativasException 
    */
-  private static void decrementarStock() throws UnidadesNegativasException, ArticuloNoExisteException {
+  private static void decrementarStock() {
     try {
       almacen.decrementarStock(pedirCodigo(), Teclado.leerEntero("¿Cuántas existencias salen? "));
       System.out.println("Unidades decrementadas.");
-    } catch (UnidadesNegativasException e) {
-      System.err.println(e.getMessage());          
-    } catch (ArticuloNoExisteException e) {
-      System.err.println(e.getMessage());
+    } catch (UnidadesNegativasException | ArticuloNoExisteException e) {
+      System.err.println("Error al decrementar: " + e.getMessage());          
     }
   }
   
-  public static void main(String[] args) throws Exception {   
+  public static void main(String[] args) {   
     // Crea un objeto de la clase Menu
     String[] opciones = new String[] {"1. Listado", "2. Alta", "3. Baja", "4. Modificación", "5. Entrada de mercancía", "6. Salida de Mercancia", "7. Salir"};
     Menu menu = new Menu("GESTISIMAL", opciones);
@@ -135,7 +129,7 @@ public class TestAlmacen {
         break;
         
       case 2:
-        System.out.println("\n" + alta());
+        alta();
         break;
         
       case 3:

@@ -20,9 +20,9 @@ public class Almacen {
    * @param unidades
    * @throws UnidadesNegativasException 
    */
-  Articulo anadir(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+  void anadir(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
     almacen.add(new Articulo(descripcion, precioCompra, precioVenta, unidades)); // Añade un nuevo artículo en el ArrayList de artículos.
-    return almacen.get(almacen.size()-1); // Devuelve el último objeto del ArrayList, que sería el último artículo.
+    // return almacen.get(almacen.size()-1); // Devuelve el último objeto del ArrayList, que sería el último artículo.
   }
   
   /**
@@ -91,6 +91,10 @@ public class Almacen {
     
   }
   
+  Articulo getUltimo() {
+    return almacen.get(almacen.size()-1);
+  }
+  
   @Override
   public String toString() {
     StringBuilder txtBuilder = new StringBuilder();
@@ -99,4 +103,6 @@ public class Almacen {
     }
     return "\n" + (txtBuilder.toString());
   }
+
+  
 }
