@@ -61,9 +61,7 @@ public class Teclado {
   }
   
   public static String leerCadena() {
-    do {
-       return s.nextLine();
-    } while (true);
+    return s.nextLine();
   }
   
 //////////////////////////////
