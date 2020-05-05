@@ -8,6 +8,6 @@ package gestisimal;
 @SuppressWarnings("serial")
 public class UnidadesNegativasException extends Exception {
   public UnidadesNegativasException(String msg) {
-    super("¡No puede haber existencias negativas!");
+    super(msg);
   }
 }
