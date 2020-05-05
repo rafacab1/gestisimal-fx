@@ -49,8 +49,8 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  Articulo modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException, ArticuloNoExisteException {
-    return getArticulo(code).modificar(descripcion, precioCompra, precioVenta, unidades);
+  void modificar(int code, String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException, ArticuloNoExisteException {
+    getArticulo(code).modificar(descripcion, precioCompra, precioVenta, unidades);
   }
   
   /**
@@ -61,8 +61,8 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  Articulo incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException {
-    return getArticulo(code).incrementarStock(cantidad);
+  void incrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException {
+    getArticulo(code).incrementarStock(cantidad);
   }
   
   /**
@@ -73,8 +73,8 @@ public class Almacen {
    * @throws UnidadesNegativasException 
    * @throws ArticuloNoExisteException 
    */
-  Articulo decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException {
-    return getArticulo(code).decrementarStock(cantidad);
+  void decrementarStock(int code, int cantidad) throws UnidadesNegativasException, ArticuloNoExisteException {
+    getArticulo(code).decrementarStock(cantidad);
   }
   
   /**

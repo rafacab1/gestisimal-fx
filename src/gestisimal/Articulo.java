@@ -77,12 +77,11 @@ public class Articulo{
    * @return
    * @throws UnidadesNegativasException
    */
-  Articulo modificar(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
+  void modificar(String descripcion, double precioCompra, double precioVenta, int unidades) throws UnidadesNegativasException {
     setDescripcion(descripcion);
     setPrecioCompra(precioCompra);
     setPrecioVenta(precioVenta);
     setUnidades(unidades);
-    return this;
   }
   
   /**
@@ -92,9 +91,8 @@ public class Articulo{
    * @return
    * @throws UnidadesNegativasException
    */
-  Articulo incrementarStock(int unidades) throws UnidadesNegativasException {
+  void incrementarStock(int unidades) throws UnidadesNegativasException {
     setUnidades(getUnidades() + unidades);
-    return this;
   }
   
   /**
@@ -104,9 +102,8 @@ public class Articulo{
    * @return
    * @throws UnidadesNegativasException
    */
-  Articulo decrementarStock(int unidades) throws UnidadesNegativasException {
+  void decrementarStock(int unidades) throws UnidadesNegativasException {
     setUnidades(getUnidades() - unidades);
-    return this;
   }
   
   @Override
