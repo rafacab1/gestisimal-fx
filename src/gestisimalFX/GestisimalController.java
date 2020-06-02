@@ -18,20 +18,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GestisimalController implements Initializable {
   
-  Almacen almacen;
+  static Almacen almacen = new Almacen();
   
   // Menu //////
   @FXML
@@ -61,15 +61,31 @@ public class GestisimalController implements Initializable {
    * VISTA INDIVIDUAL
    */
   @FXML
-  private TextField codigoVI;
+  TextField codigoVI = new TextField("");
   @FXML
-  private TextArea descVI;
+  TextArea descVI = new TextArea("");
   @FXML
-  private TextField precioCompraVI;
+  TextField precioCompraVI = new TextField("");
   @FXML
-  private TextField precioVentaVI;
+  TextField precioVentaVI = new TextField("");
   @FXML
-  private TextField udsVI;
+  TextField udsVI = new TextField("");
+  
+  /*******************
+   * VISTA ARTÍCULOS (TABLA)
+   */
+  @FXML
+  private TableView<Articulo> tablaVA;
+  @FXML
+  private TableColumn<Articulo, Integer> codigoVA;
+  @FXML
+  private TableColumn<Articulo, String> descVA;
+  @FXML
+  private TableColumn<Articulo, Double> preComVA;
+  @FXML
+  private TableColumn<Articulo, Double> preVenVA;
+  @FXML
+  private TableColumn<Articulo, Integer> udsVA;
   
   boolean finalizado = false; // Para controlar bucles
   int tmpInt; // Entero temporal para return
@@ -239,6 +255,36 @@ public class GestisimalController implements Initializable {
     // TODO: Implementar ArticuloNoExisteException ¿Convertirlo en FX?
   }
   
+  public void reloadTb() {
+    codigoVA.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+    descVA.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+    preComVA.setCellValueFactory(new PropertyValueFactory<>("precioCompra"));
+    preVenVA.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
+    udsVA.setCellValueFactory(new PropertyValueFactory<>("unidades"));
+  }
+  
+  /**
+   * Método para ver los artículos en forma de
+   * tabla.
+   * @param e
+   * @throws IOException 
+   */
+  @FXML
+  public void verArticulos(ActionEvent e) throws IOException {
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Vista de artículos");
+    FXMLLoader fxml = new FXMLLoader(this.getClass().getResource("VistaArticulos.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    
+    reloadTb();
+    for (Articulo art : almacen.almacen) {
+      tablaVA.getItems().add(art);
+    }
+    
+    stage.showAndWait();
+  }
+  
   /**
    * Método para ver un artículo en concreto
    * @throws IOException 
@@ -246,6 +292,7 @@ public class GestisimalController implements Initializable {
    */
   @FXML
   public void listarInd(ActionEvent e) throws IOException, ArticuloNoExisteException { 
+    // TODO: Arreglar ERROR: No se muestra la información en los TextField y TextArea
     Articulo artListado = almacen.getArticulo(pideId());
         
     Stage stage = new Stage();
@@ -253,13 +300,13 @@ public class GestisimalController implements Initializable {
     FXMLLoader fxml = new FXMLLoader(this.getClass().getResource("VistaIndividual.fxml"));
     GridPane root = fxml.<GridPane>load();
     stage.setScene(new Scene(root));
-    
+        
     codigoVI.setText(Integer.toString(artListado.getCodigo()));
     descVI.setText(artListado.getDescripcion());
     precioCompraVI.setText(Double.toString(artListado.getPrecioCompra()));
     precioVentaVI.setText(Double.toString(artListado.getPrecioVenta()));
     udsVI.setText(Integer.toString(artListado.getUnidades()));
-    
+        
     stage.showAndWait();
   }
   
@@ -393,17 +440,15 @@ public class GestisimalController implements Initializable {
     quehace.setText("GESTISIMAL");
   }
   
+  @FXML
+  public void salir(ActionEvent e) {
+    System.exit(0);
+  }
+  
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
     // Creo el almacén
-    almacen = new Almacen();
     
-    // Salida con Ctrl+X
-    KeyCombination ctrlX = new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN);
-    exitmenubtn.setAccelerator(ctrlX);
-    exitmenubtn.setOnAction(event -> {
-      System.out.println("Saliendo...");
-      System.exit(0);
-    });
+    
   }
 }

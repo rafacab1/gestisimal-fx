@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -26,7 +27,7 @@
         <menus>
           <Menu fx:id="menuListado" mnemonicParsing="false" onHidden="#quitaInfo" onShown="#darInfo" text=" _Listado">
             <items>
-              <MenuItem mnemonicParsing="false" text="Lista" />
+              <MenuItem mnemonicParsing="false" onAction="#verArticulos" text="Lista" />
                   <MenuItem mnemonicParsing="false" onAction="#listarInd" text="Individual" />
             </items>
                <graphic>
@@ -96,7 +97,10 @@
             <items>
               <MenuItem mnemonicParsing="false" text="Exportar" />
                   <MenuItem mnemonicParsing="false" text="Importar" />
-                  <MenuItem fx:id="exitmenubtn" mnemonicParsing="false" text="Salir" />
+                  <MenuItem fx:id="exitmenubtn" mnemonicParsing="false" onAction="#salir" text="Salir">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">

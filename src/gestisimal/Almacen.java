@@ -12,7 +12,7 @@ public class Almacen {
   /**
    * ArrayList de objetos de la clase Articulo
    */
-  private ArrayList<Articulo> almacen = new ArrayList<Articulo>();
+  public ArrayList<Articulo> almacen = new ArrayList<Articulo>();
   
   /**
    * Método para añadir artículos al almacén.
