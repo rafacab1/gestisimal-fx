@@ -3,6 +3,9 @@ package gestisimal;
 /*
  * @author Rafael Alberto Caballero Osuna
  * https://github.com/rafacab1
+ * 
+ * NOTA: Forzosamente he tenido que modificar esta clase para poder
+ * usar algunos métodos
  */
 public class Articulo{
   // Atributos ////////
@@ -28,11 +31,11 @@ public class Articulo{
   }
 
   // Getters & Setters ////////
-  private int getCodigo() {
+  public int getCodigo() {
     return codigo;
   }
 
-  private String getDescripcion() {
+  public String getDescripcion() {
     return descripcion;
   }
 
@@ -40,7 +43,7 @@ public class Articulo{
     this.descripcion = descripcion;
   }
 
-  private double getPrecioCompra() {
+  public double getPrecioCompra() {
     return precioCompra;
   }
 
@@ -48,7 +51,7 @@ public class Articulo{
     this.precioCompra = precioCompra;
   }
 
-  private double getPrecioVenta() {
+  public double getPrecioVenta() {
     return precioVenta;
   }
 
@@ -56,7 +59,7 @@ public class Articulo{
     this.precioVenta = precioVenta;
   }
 
-  private int getUnidades() {
+  public int getUnidades() {
     return unidades;
   }
 
