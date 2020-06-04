@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import gestisimal.Almacen;
-import gestisimal.Articulo;
 import gestisimal.ArticuloNoExisteException;
 import gestisimal.UnidadesNegativasException;
 import javafx.event.ActionEvent;
@@ -18,12 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -57,40 +51,14 @@ public class GestisimalController implements Initializable {
   @FXML
   private MenuItem exitmenubtn; // Botón Utilidades > Salir (Ctrl+X)
   
-  /*******************
-   * VISTA INDIVIDUAL
-   */
-  @FXML
-  TextField codigoVI = new TextField("");
-  @FXML
-  TextArea descVI = new TextArea("");
-  @FXML
-  TextField precioCompraVI = new TextField("");
-  @FXML
-  TextField precioVentaVI = new TextField("");
-  @FXML
-  TextField udsVI = new TextField("");
-  
-  /*******************
-   * VISTA ARTÍCULOS (TABLA)
-   */
-  @FXML
-  private TableView<Articulo> tablaVA;
-  @FXML
-  private TableColumn<Articulo, Integer> codigoVA;
-  @FXML
-  private TableColumn<Articulo, String> descVA;
-  @FXML
-  private TableColumn<Articulo, Double> preComVA;
-  @FXML
-  private TableColumn<Articulo, Double> preVenVA;
-  @FXML
-  private TableColumn<Articulo, Integer> udsVA;
-  
   boolean finalizado = false; // Para controlar bucles
   int tmpInt; // Entero temporal para return
   double tmpDouble; // Double temporal para return
   String tmpStr; // Cadena temporal para return
+  
+  public static Almacen getAlmacen() {
+    return almacen;
+  }
   
   
   /**
@@ -255,34 +223,40 @@ public class GestisimalController implements Initializable {
     // TODO: Implementar ArticuloNoExisteException ¿Convertirlo en FX?
   }
   
-  public void reloadTb() {
-    codigoVA.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-    descVA.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-    preComVA.setCellValueFactory(new PropertyValueFactory<>("precioCompra"));
-    preVenVA.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
-    udsVA.setCellValueFactory(new PropertyValueFactory<>("unidades"));
+  public static void cambiarVista(boolean aTabla) throws IOException {
+    if (aTabla) {
+      verArticulos();
+    } else if (!aTabla){
+      listarInd();
+    }
   }
   
   /**
-   * Método para ver los artículos en forma de
-   * tabla.
+   * Método para ver los artículos en una tabla
    * @param e
-   * @throws IOException 
+   * @throws IOException
    */
   @FXML
   public void verArticulos(ActionEvent e) throws IOException {
     Stage stage = new Stage();
     stage.setTitle("Gestisimal: Vista de artículos");
-    FXMLLoader fxml = new FXMLLoader(this.getClass().getResource("VistaArticulos.fxml"));
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("VistaArticulos.fxml"));
     GridPane root = fxml.<GridPane>load();
     stage.setScene(new Scene(root));
-    
-    reloadTb();
-    for (Articulo art : almacen.almacen) {
-      tablaVA.getItems().add(art);
-    }
-    
-    stage.showAndWait();
+    stage.show();
+  }
+  
+  /**
+   * Método para ver los artículos en una tabla
+   * @throws IOException
+   */
+  public static void verArticulos() throws IOException {
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Vista de artículos");
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("VistaArticulos.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    stage.show();
   }
   
   /**
@@ -291,23 +265,26 @@ public class GestisimalController implements Initializable {
    * @throws ArticuloNoExisteException 
    */
   @FXML
-  public void listarInd(ActionEvent e) throws IOException, ArticuloNoExisteException { 
-    // TODO: Arreglar ERROR: No se muestra la información en los TextField y TextArea
-    Articulo artListado = almacen.getArticulo(pideId());
-        
+  public void listarInd(ActionEvent e) throws IOException, ArticuloNoExisteException {
     Stage stage = new Stage();
     stage.setTitle("Gestisimal: Vista individual");
-    FXMLLoader fxml = new FXMLLoader(this.getClass().getResource("VistaIndividual.fxml"));
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("VistaIndividual.fxml"));
     GridPane root = fxml.<GridPane>load();
     stage.setScene(new Scene(root));
-        
-    codigoVI.setText(Integer.toString(artListado.getCodigo()));
-    descVI.setText(artListado.getDescripcion());
-    precioCompraVI.setText(Double.toString(artListado.getPrecioCompra()));
-    precioVentaVI.setText(Double.toString(artListado.getPrecioVenta()));
-    udsVI.setText(Integer.toString(artListado.getUnidades()));
-        
-    stage.showAndWait();
+    stage.show();
+  }
+  
+  /**
+   * Método para ver un artículo en concreto
+   * @throws IOException
+   */
+  public static void listarInd() throws IOException {
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Vista individual");
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("VistaIndividual.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    stage.show();
   }
   
   /** 
