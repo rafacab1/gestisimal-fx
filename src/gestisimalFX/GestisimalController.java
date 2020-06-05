@@ -56,10 +56,20 @@ public class GestisimalController implements Initializable {
   double tmpDouble; // Double temporal para return
   String tmpStr; // Cadena temporal para return
   
+  // Modificacion
+  static int currentId; // ID artículo a modificar
+  
   public static Almacen getAlmacen() {
     return almacen;
   }
   
+  public static void setAlmacen(Almacen almacenxt) {
+    almacen = almacenxt;
+  }
+  
+  public static int getCurrentId() {
+    return currentId;
+  }
   
   /**
    * Método para pedir el código del artículo
@@ -316,19 +326,28 @@ public class GestisimalController implements Initializable {
   
   /**
    * Método para modificar un artículo 
+   * @throws IOException 
    */
   @FXML
-  public void modificart(ActionEvent e) {
-    try {
-      almacen.modificar(pideId(), pideDescripcion(), pidePCompra(), pidePVenta(), pideUds());
-      hecho(2);
-      System.out.println("Artículo modificado.");
-      System.out.println(almacen.toString()); // TODO: Para pruebas sólo, borrar
-    } catch (UnidadesNegativasException | ArticuloNoExisteException exc) {
-      System.err.println(exc.getMessage());
-    }
+  public void modificart(ActionEvent e) throws IOException {
+    currentId = pideId();
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Modificar");
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("ModArticulo.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    stage.show();
   }
   
+  public static void modificart(int id) throws IOException {
+    currentId = id;
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Modificar");
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("ModArticulo.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    stage.show();
+  }
   
   /**
    * Método para la entrada de mercancía
@@ -365,7 +384,7 @@ public class GestisimalController implements Initializable {
    * según la tarea realizada
    * @param tarea
    */
-  public void hecho(int tarea) {
+  public static void hecho(int tarea) {
     Alert alert2 = new Alert(AlertType.INFORMATION);
     alert2.setTitle("Tarea realizadaa");
     alert2.setHeaderText(null);
@@ -410,6 +429,21 @@ public class GestisimalController implements Initializable {
     } else {
       quehace.setText("GESTISIMAL");
     }
+  }
+  
+  @FXML
+  public void exporta(ActionEvent e) throws IOException {
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Exportar");
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("Exportar.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    stage.show();
+  }
+  
+  @FXML
+  public void importa(ActionEvent e) {
+    
   }
   
   @FXML

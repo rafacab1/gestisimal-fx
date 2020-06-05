@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import gestisimal.Almacen;
 import gestisimal.Articulo;
+import gestisimal.ArticuloNoExisteException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,6 +43,18 @@ public class VArticulosController implements Initializable {
     preComVA.setCellValueFactory(new PropertyValueFactory<>("precioCompra"));
     preVenVA.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
     udsVA.setCellValueFactory(new PropertyValueFactory<>("unidades"));
+    
+    for (Articulo art : almacen.almacen) {
+      tablaVA.getItems().add(art);
+    }
+  }
+  
+  @FXML
+  public void modificar(ActionEvent e) throws IOException, ArticuloNoExisteException {
+    Articulo articulo = tablaVA.getSelectionModel().getSelectedItem();
+    GestisimalController.modificart(articulo.getCodigo());
+    Stage stage = (Stage) tablaVA.getScene().getWindow();
+    stage.close();
   }
 
   @Override
@@ -48,9 +62,6 @@ public class VArticulosController implements Initializable {
     almacen = GestisimalController.getAlmacen();
 
     reloadTb();
-    for (Articulo art : almacen.almacen) {
-      tablaVA.getItems().add(art);
-    }
     
     changeView.setOnAction(e -> {
       try {

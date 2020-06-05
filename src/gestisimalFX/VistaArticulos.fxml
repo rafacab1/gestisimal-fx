@@ -46,7 +46,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </Separator>
-      <Button mnemonicParsing="false" text="Modificar artículo" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onAction="#modificar" text="Modificar artículo" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

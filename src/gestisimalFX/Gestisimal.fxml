@@ -95,8 +95,8 @@
                </items></Menu>
           <Menu fx:id="menuUtils" mnemonicParsing="false" onHidden="#quitaInfo" onShown="#darInfo" text=" _Utilidades">
             <items>
-              <MenuItem mnemonicParsing="false" text="Exportar" />
-                  <MenuItem mnemonicParsing="false" text="Importar" />
+              <MenuItem mnemonicParsing="false" onAction="#exporta" text="Exportar" />
+                  <MenuItem mnemonicParsing="false" onAction="#importa" text="Importar" />
                   <MenuItem fx:id="exitmenubtn" mnemonicParsing="false" onAction="#salir" text="Salir">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />

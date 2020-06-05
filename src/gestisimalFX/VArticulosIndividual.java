@@ -9,6 +9,7 @@ import gestisimal.Articulo;
 import gestisimal.ArticuloNoExisteException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,8 +21,8 @@ import javafx.stage.Stage;
 public class VArticulosIndividual implements Initializable {
 
   Almacen almacen;
+  static int articuloActual = 1;
   Articulo artListado;
-  int articuloActual = 1;
   
   /*******************
    * VISTA INDIVIDUAL
@@ -40,6 +41,9 @@ public class VArticulosIndividual implements Initializable {
   private ScrollBar scroll;
   @FXML
   private Button changeView;
+  @FXML
+  private Button modify;
+  
   
   public void recarga() throws ArticuloNoExisteException {
     artListado = almacen.getArticulo(articuloActual);
@@ -49,6 +53,13 @@ public class VArticulosIndividual implements Initializable {
     precioCompraVI.setText(Double.toString(artListado.getPrecioCompra()));
     precioVentaVI.setText(Double.toString(artListado.getPrecioVenta()));
     udsVI.setText(Integer.toString(artListado.getUnidades()));
+  }
+  
+  @FXML
+  public void modificar(ActionEvent e) throws IOException, ArticuloNoExisteException {
+    GestisimalController.modificart(articuloActual);
+    Stage stage = (Stage) codigoVI.getScene().getWindow();
+    stage.close();
   }
   
   
@@ -77,6 +88,7 @@ public class VArticulosIndividual implements Initializable {
       e.printStackTrace();
     }
     
+    // Botón cambio de vista
     changeView.setOnAction(e -> {
       try {
       // Cambio de vista
