@@ -442,8 +442,13 @@ public class GestisimalController implements Initializable {
   }
   
   @FXML
-  public void importa(ActionEvent e) {
-    
+  public void importa(ActionEvent e) throws IOException {
+    Stage stage = new Stage();
+    stage.setTitle("Gestisimal: Importar");
+    FXMLLoader fxml = new FXMLLoader(GestisimalController.class.getResource("Importar.fxml"));
+    GridPane root = fxml.<GridPane>load();
+    stage.setScene(new Scene(root));
+    stage.show();
   }
   
   @FXML
