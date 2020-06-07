@@ -117,5 +117,10 @@
          <padding>
             <Insets left="10.0" />
          </padding></Label>
+      <ImageView fx:id="background" fitHeight="504.0" fitWidth="922.0" preserveRatio="true" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <image>
+            <Image url="@gestisimal.png" />
+         </image>
+      </ImageView>
    </children>
 </GridPane>

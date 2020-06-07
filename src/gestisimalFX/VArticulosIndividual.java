@@ -76,7 +76,6 @@ public class VArticulosIndividual implements Initializable {
               try {
                 recarga();
               } catch (ArticuloNoExisteException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
               }
           }
@@ -84,7 +83,6 @@ public class VArticulosIndividual implements Initializable {
     try {
       recarga();
     } catch (ArticuloNoExisteException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     
@@ -97,7 +95,6 @@ public class VArticulosIndividual implements Initializable {
       Stage stage = (Stage) scroll.getScene().getWindow();
       stage.close();
       } catch (IOException e1) {
-      // TODO Auto-generated catch block
       e1.printStackTrace();
       }
      });
